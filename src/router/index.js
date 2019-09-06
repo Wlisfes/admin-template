@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import BasicLayout from "../layout/BasicLayout";
+import BasicLayout from "@/layout/BasicLayout";
 
 Vue.use(Router);
 

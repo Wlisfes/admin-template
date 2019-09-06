@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import { AppDeviceEnquire } from '@/utils/mixin'
 export default {
-    
+    mixins: [AppDeviceEnquire],
+    mounted () {
+
+    }
 }
 </script>
 

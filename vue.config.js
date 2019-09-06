@@ -15,6 +15,7 @@ module.exports = {
         })
         config.resolve.alias
             .set('@', resolve('src'))
+            .set('@comp', resolve('src/components'))
     },
     productionSourceMap: false,
     //
