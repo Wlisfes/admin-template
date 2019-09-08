@@ -1,3 +1,4 @@
+
 <script>
 import { Drawer } from 'ant-design-vue';
 import { mapState } from 'vuex';
@@ -29,4 +30,5 @@ export default {
         )
     }
 }
+
 </script>

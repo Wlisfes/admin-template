@@ -17,6 +17,11 @@ export default {
             this.$store.commit('setcollapsed', Boll)
         }
     },
+    watch: {
+        device() {
+            console.log(this.isMobile())
+        }
+    },
     render() {
         return (
             !this.isMobile() && <Layout.Sider
@@ -27,7 +32,7 @@ export default {
                 onBreakpoint={this.handelbreakpoint}
                 width={256}
             >
-                <Menu></Menu>
+                <Menu ></Menu>
             </Layout.Sider>
         )
     }

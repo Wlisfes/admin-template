@@ -42,10 +42,9 @@ const AppDeviceEnquire = {
                         $store.commit('setdevice', 'tablet')
                     break
                 case DEVICE_TYPE.MOBILE:
-                default:
                     $store.commit('setdevice', 'mobile')
                     $store.commit('setcollapsed', true)
-                    break
+                break
             }
         })
     }
