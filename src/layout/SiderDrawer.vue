@@ -2,7 +2,7 @@
 <script>
 import { mixin, mixinDevice } from '@/utils/mixin';
 import { mapState } from 'vuex';
-import { Drawer } from 'ant-design-vue';
+import { Drawer,Layout } from 'ant-design-vue';
 import Menu from '@/layout/Menu';
 import menu from './data'
 export default {
@@ -39,17 +39,16 @@ export default {
                 closable={false}
                 visible={!this.collapsed}
                 onClose={this.handelClose}
-            >
-                <Menu {...{ props }}></Menu>
+            >   
+                <Layout.Sider
+                    width={256}
+                    style={{ minHeight: '100vh' }}
+                >
+                    <Menu {...{ props }}></Menu>
+                </Layout.Sider>
             </Drawer>
         )
     }
 }
 
 </script>
-
-<style lang="less">
-.Drawer-Container /deep/ .ant-drawer-body{
-    padding: 0;
-}
-</style>
