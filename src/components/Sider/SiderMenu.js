@@ -1,9 +1,16 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-09-09 23:05:18 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-09-09 23:05:40
+ * @Description: 大屏侧边导航栏组件
+ */
 
-<script>
+
 import { mixin, mixinDevice } from '@/utils/mixin';
 import { mapState } from 'vuex';
 import { Layout } from 'ant-design-vue';
-import Menu from '@/layout/Menu';
+import Menu from '@/components/Sider/Menu';
 import menu from './data'
 export default {
     mixins: [mixin, mixinDevice],
@@ -47,8 +54,3 @@ export default {
         )
     }
 }
-</script>
-
-<style lang="less" scoped>
-
-</style>

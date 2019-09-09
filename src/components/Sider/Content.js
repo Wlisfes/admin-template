@@ -1,5 +1,12 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-09-09 23:03:57 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-09-09 23:03:57 
+ * @Description: Content容器组件
+ */
 
-<script>
+
 import { mixin, mixinDevice } from '@/utils/mixin';
 import { mapState } from 'vuex'
 import { Layout,Icon,Form } from 'ant-design-vue';
@@ -38,4 +45,3 @@ export default {
     }
 }
 
-</script>

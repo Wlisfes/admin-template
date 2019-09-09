@@ -1,9 +1,16 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-09-09 23:04:40 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-09-09 23:05:04
+ * @Description: 小屏幕抽屉式菜单栏组件
+ */
 
-<script>
+
 import { mixin, mixinDevice } from '@/utils/mixin';
 import { mapState } from 'vuex';
 import { Drawer,Layout } from 'ant-design-vue';
-import Menu from '@/layout/Menu';
+import Menu from '@/components/Sider/Menu';
 import menu from './data'
 export default {
     mixins: [mixin, mixinDevice],
@@ -51,4 +58,4 @@ export default {
     }
 }
 
-</script>
+

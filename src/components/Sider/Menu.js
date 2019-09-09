@@ -1,5 +1,12 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-09-09 23:04:22 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-09-09 23:04:22 
+ * @Description: 导航栏菜单组件
+ */
 
-<script>
+
 import { mixin, mixinDevice } from '@/utils/mixin';
 import { Menu,Icon } from 'ant-design-vue';
 const { SubMenu,Item } = Menu;
@@ -99,4 +106,3 @@ export default {
 }
 
 
-</script>
