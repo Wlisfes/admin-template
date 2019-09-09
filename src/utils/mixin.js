@@ -36,14 +36,14 @@ const AppDeviceEnquire = {
         deviceEnquire(deviceType => {
             switch (deviceType) {
                 case DEVICE_TYPE.DESKTOP:
-                        $store.commit('setdevice', 'desktop')
+                        $store.commit('app/setdevice', 'desktop')
                     break
                 case DEVICE_TYPE.TABLET:
-                        $store.commit('setdevice', 'tablet')
+                        $store.commit('app/setdevice', 'tablet')
                     break
                 case DEVICE_TYPE.MOBILE:
-                    $store.commit('setdevice', 'mobile')
-                    $store.commit('setcollapsed', true)
+                    $store.commit('app/setdevice', 'mobile')
+                    $store.commit('app/setcollapsed', true)
                 break
             }
         })

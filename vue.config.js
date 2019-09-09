@@ -2,6 +2,7 @@ const path = require('path')
 const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
+    assetsDir: 'static',
     chainWebpack: (config) => {
         //移除prefetch 插件
         config.plugins.delete("prefetch");

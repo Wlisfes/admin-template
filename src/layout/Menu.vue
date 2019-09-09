@@ -1,120 +1,91 @@
 
 <script>
 import { mixin, mixinDevice } from '@/utils/mixin';
-import { mapState } from 'vuex';
 import { Menu,Icon } from 'ant-design-vue';
-const { SubMenu,Item } = Menu
+const { SubMenu,Item } = Menu;
+
 export default {
     mixins: [mixin, mixinDevice],
-    computed: {
-        ...mapState({
-            collapsed: state => state.app.collapsed,
-            menuOpenKeys: state => state.app.menuOpenKeys,
-            menuSelectedKeys: state => state.app.menuSelectedKeys
-        })
+    props: {
+        menu: {
+            type: Array,
+            default: () => []
+        },
+        openKeys: {
+            type: Array,
+            default: () => []
+        },
+        selectedKeys: {
+            type: Array,
+            default: () => []
+        },
+        collapsed: {
+            type: Boolean,
+            default: () => true
+        }
     },
     data () {
         return {
-            rootSubmenuKeys: ['sub1', 'sub2', 'sub3'],
-            openKeys: ['sub1'],
-            selectedKeys: ['sub1-1'],
-
-            MenuRoute: [
-                {
-                    key: 'sub1',
-                    icon: 'pie-chart',
-                    title: '刀剑神域',
-                    children: [
-                        {
-                            key: 'sub1-1',
-                            title: '桐谷和人'
-                        },
-                        {
-                            key: 'sub1-2',
-                            title: '结诚明月奈'
-                        },
-                        {
-                            key: 'sub1-3',
-                            title: '西莉卡'
-                        }
-                    ]
-                },
-                {
-                    key: 'sub2',
-                    icon: 'radar-chart',
-                    title: '斩·赤红之瞳',
-                    children: [
-                        {
-                            key: 'sub2-1',
-                            title: '玛茵'
-                        },
-                        {
-                            key: 'sub1-2',
-                            title: '赤瞳'
-                        },
-                        {
-                            key: 'sub1-3',
-                            title: '黑瞳'
-                        }
-                    ]
-                },
-                {
-                    key: 'sub3',
-                    icon: 'heat-map',
-                    title: '樱花庄的宠物女孩',
-                    children: [
-                        {
-                            key: 'sub3-1',
-                            title: '真白'
-                        }
-                    ]
-                }
-            ]
+            MenuOpenKeys: [],
+            MenuCatchOpenKeys: [],
+            MenuSelectedKeys: []
         }
     },
+    mounted () {
+        setTimeout(() => {
+            if(!this.collapsed) {
+                this.MenuOpenKeys = this.openKeys
+            }
+            this.MenuSelectedKeys = this.selectedKeys
+            this.MenuCatchOpenKeys = this.openKeys
+        }, 16)
+    },
     methods: {
-        //open菜单过滤
-        handelMenuOpenChenge(openKeys) {
-            console.log(openKeys)
-            const latestOpenKey = openKeys.find(key => this.menuOpenKeys.indexOf(key) === -1)
-
-            if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-                // this.$store.commit('setmenuOpenKeys', openKeys)
-                this.openKeys = openKeys
+        //open菜单过滤 实现始终只打开一个菜单列表
+        handelMenuOpenChenge(open) {
+            const menu = this.menu.map(k => k.key)
+            const key = open.find(key => this.MenuOpenKeys.indexOf(key) === -1)
+            if (menu.indexOf(key) === -1) {
+                this.MenuOpenKeys = open
             }
             else {
-                const MeunOpenKeys = latestOpenKey ? [latestOpenKey] : []
-                // this.$store.commit('setmenuOpenKeys', MeunOpenKeys)
-                this.openKeys = MeunOpenKeys
+                this.MenuOpenKeys = key ? [key] : []
             }
         },
-        handelMenuSelect(e) {
-            console.log(e)
-            this.selectedKeys = e.selectedKeys
-            // this.$store.commit('setmenuSelectedKeys', e.keyPath)
+        handelMenuSelect(opts) {
+            const { key } = opts
+            this.MenuSelectedKeys = opts.selectedKeys
+            this.$store.commit('app/setselectedKeys', opts.keyPath)
+
+            //获取此菜单的父级
+            const flter = this.menu.filter(k => k.children.some(v => key === v.key))[0].key
+            this.$store.commit('app/setopenKeys', [flter])
+            this.MenuCatchOpenKeys = [flter]
         }
     },
     watch: {
+        //监听导航菜菜单收起展开
         collapsed() {
-            if (this.collapsed) {
-                this.openKeys = []
-            } else {
-                
+            if(this.collapsed) {
+                this.MenuCatchOpenKeys = this.MenuOpenKeys
+                this.MenuOpenKeys = []
+            }
+            else {
+                this.MenuOpenKeys = this.MenuCatchOpenKeys
             }
         }
     },
     render() {
-        const MenuRoute = this.MenuRoute
         return (
             <Menu
                 theme="dark"
                 mode="inline"
-                openKeys={this.openKeys}
-                selectedKeys={this.selectedKeys}
+                openKeys={this.MenuOpenKeys}
+                selectedKeys={this.MenuSelectedKeys}
                 onOpenChange={this.handelMenuOpenChenge}
                 onSelect={this.handelMenuSelect}
             >
-                {MenuRoute.map(ele => (
+                {this.menu.map(ele => (
                     <SubMenu key={ele.key}>
                         <span slot="title"><Icon type={ele.icon} /><span>{ele.title}</span></span>
                         {ele.children.map(chil => (

@@ -1,34 +1,55 @@
 
 <script>
-import { Drawer } from 'ant-design-vue';
-import { mapState } from 'vuex';
 import { mixin, mixinDevice } from '@/utils/mixin';
-
+import { mapState } from 'vuex';
+import { Drawer } from 'ant-design-vue';
+import Menu from '@/layout/Menu';
+import menu from './data'
 export default {
     mixins: [mixin, mixinDevice],
     computed: {
         ...mapState({
-            collapsed: state => state.app.collapsed
+            collapsed: state => state.app.collapsed,
+            openKeys: state => state.app.openKeys,
+            selectedKeys: state => state.app.selectedKeys
         })  
+    },
+    data () {
+        return {
+            menu
+        }
     },
     methods: {
         //关闭侧边栏 
         handelClose() {
-            this.$store.commit('setcollapsed', !this.collapsed)
+            this.$store.commit('app/setcollapsed', !this.collapsed)
         }  
     },
     render() {
+        const props = {
+            menu: this.menu,
+            openKeys: this.openKeys,
+            selectedKeys: this.selectedKeys,
+            collapsed: this.collapsed
+        }
         return (
             this.isMobile() && <Drawer
+                wrapClassName="Drawer-Container"
                 placement='left'
                 closable={false}
                 visible={!this.collapsed}
                 onClose={this.handelClose}
             >
-            
+                <Menu {...{ props }}></Menu>
             </Drawer>
         )
     }
 }
 
 </script>
+
+<style lang="less">
+.Drawer-Container /deep/ .ant-drawer-body{
+    padding: 0;
+}
+</style>

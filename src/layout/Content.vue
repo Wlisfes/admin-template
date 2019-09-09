@@ -15,7 +15,7 @@ export default {
     methods: {
         //手动更改响应式布局
         handelcollapsed() {
-            this.$store.commit('setcollapsed', !this.collapsed)
+            this.$store.commit('app/setcollapsed', !this.collapsed)
         }
     },
     render() {

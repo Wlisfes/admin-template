@@ -1,16 +1,15 @@
 
 const app = {
+    namespaced: true,
     state: {
         //视口
         device: 'desktop',
         //菜单是否收起
         collapsed: false,
         //初始展开的 SubMenu 菜单项 key 数组
-        menuOpenKeys: ['sub1'],
+        openKeys: ['sub1'],
         //初始选中的 Item 菜单项 key 数组
-        menuSelectedKeys: ['sub1-2']
-
-
+        selectedKeys: ['sub1-1']
     },
     mutations: {
         setdevice: (state, device) => {
@@ -19,13 +18,16 @@ const app = {
         setcollapsed: (state, collapsed) => {
             state.collapsed = collapsed
         },
-        setmenuOpenKeys: (state, meunOpenKeys) => {
-            state.meunOpenKeys = meunOpenKeys
+        setopenKeys: (state, openKeys) => {
+            state.openKeys = openKeys
         },
-        setmenuSelectedKeys: (state, meunSelectedKeys) => {
-            state.meunSelectedKeys = meunSelectedKeys
+        setselectedKeys: (state, selectedKeys) => {
+            state.selectedKeys = selectedKeys
         }
+    },
+    actions: {
+
     }
 }
 
-export default app
+export default app;
