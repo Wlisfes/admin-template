@@ -42,10 +42,15 @@ const LoginForm = {
             validateFields(validateFieldsKey, { force: true }, (err, values) => {
                 if(!err) {
                     console.log(values)
-                    setTimeout(() => {
-                        state.loginBtn = false
+                    // setTimeout(() => {
+                    //     state.loginBtn = false
+                    //     this.$router.push('/')
+                    // }, 1500)
+
+                    this.$store.dispatch('route/addRoute').then(res => {
+                        console.log(res)
                         this.$router.push('/')
-                    }, 1500)
+                    })
                 }
                 else {
                     setTimeout(() => {

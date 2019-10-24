@@ -1,5 +1,6 @@
 
-import app from './app'
+import app from './app';
+import route from './route'
 
 
-export default { app }
+export default { app,route }
