@@ -114,8 +114,8 @@ const RegisterForm = {
         const { state } = this;
         return (
             <div class="main">
-                <h3 style={{ marginBottom: '20px', fontSize: '16px' }}><span>注册</span></h3>
-                <Form>
+                {false && <h3 style={{ marginBottom: '20px', fontSize: '16px' }}><span>注册</span></h3>}
+                <Form style={{marginTop: '16px'}}>
                     <Form.Item>
                         {
                             getFieldDecorator('email', {
@@ -197,7 +197,7 @@ const RegisterForm = {
                             >获取验证码</Button>
                         </Col>
                     </Row>
-                    <Form.Item>
+                    <Form.Item style={{margin: 0}}>
                         <Button
                             size="large"
                             type="primary"

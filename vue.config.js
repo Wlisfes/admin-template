@@ -19,7 +19,14 @@ module.exports = {
             .set('@comp', resolve('src/components'))
     },
     productionSourceMap: false,
-    //
+    configureWebpack: config => {
+        if (process.env.NODE_ENV === 'production') {
+            config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+            config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log']
+        }
+    },
     css: {
         loaderOptions: {
             less: {
@@ -29,12 +36,15 @@ module.exports = {
     },
     devServer: {
         port: 8800,
-        // proxy: {
-        //     '/api': {
-        //         target: 'http://localhost:9800',
-        //         ws: false,
-        //         changeOrigin: true
-        //     }
-        // }
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                ws: false,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
     }
 }

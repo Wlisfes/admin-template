@@ -16,13 +16,32 @@ const LoginForm = {
                 loginType: 0,
                 smsSendBtn: false
             }
+            
         }
     },
-
+    created() {
+        
+        
+    },
     methods: {
+        async userInfo() {
+            const [err,res] = await this.api.userInfo()
+
+            console.log(err, res)
+        },
+        //更新验证码
+        getCode(ref) {
+            this.$refs[ref].src = `/api/api/admin/code?t=${Math.random()}`
+        },
         //tabs切换事件
         handleTabClick(key) {
             this.customActiveKey = key
+            if(key === 'tab1' && this.$refs.code1) {
+                this.getCode('code1')
+            }
+            else if(key === 'tab2' && this.$refs.code2) {
+                this.getCode('code2')
+            }
         },
         //确定 提交表单事件
         handleSubmit(e) {
@@ -37,36 +56,23 @@ const LoginForm = {
             //按钮load动画
             state.loginBtn = true
 
-            const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha']
+            const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password1', 'code1'] : ['email', 'password2', 'code2']
 
             validateFields(validateFieldsKey, { force: true }, (err, values) => {
                 if(!err) {
                     console.log(values)
-                    // setTimeout(() => {
-                    //     state.loginBtn = false
-                    //     this.$router.push('/')
-                    // }, 1500)
-
-                    this.$store.dispatch('route/addRoute').then(res => {
+                    this.api.login({
+                        userName: values.username,
+                        password: password1._value
+                    }).then(res => {
                         console.log(res)
-                        this.$router.push('/')
+                        state.loginBtn = false
                     })
                 }
                 else {
                     setTimeout(() => {
                         state.loginBtn = false
                     }, 600)
-                }
-            })
-        },
-        //验证码发送
-        getCaptcha(e) {
-            e.preventDefault()
-            const { form: { validateFields }, state } = this
-            //验证手机号
-            validateFields(['mobile'], { force: true }, (err, values) => {
-                if(!err) {
-                    console.log(values)
                 }
             })
         }
@@ -85,32 +91,20 @@ const LoginForm = {
                             <Form.Item>
                             {
                                 getFieldDecorator('username', {
-                                    rules: [{ required: true, message: '请输入帐户名或邮箱地址' }],
+                                    rules: [{ required: true, message: '请输入帐户名' }],
                                     validateTrigger: 'change'
-                                })(<Input size="large" type="text" placeholder="账户: admin">
+                                })(<Input size="large" type="text" placeholder="账户">
                                     <Icon slot="prefix" type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>
                                 </Input>)
                             }
                             </Form.Item>
                             <Form.Item>
                             {
-                                getFieldDecorator('password', {
+                                getFieldDecorator('password1', {
                                     rules: [{ required: true, message: '请输入密码' }],
                                     validateTrigger: 'blur'
-                                })(<Input size="large" type="password" placeholder="密码: 000000">
+                                })(<Input size="large" type="password" placeholder="密码">
                                     <Icon slot="prefix" type="lock" style={{ color: 'rgba(0,0,0,.25)' }}/>
-                                </Input>)
-                            }
-                            </Form.Item>
-                        </Tabs.TabPane>
-                        <Tabs.TabPane key="tab2" tab="手机号登录">
-                            <Form.Item>
-                            {
-                                getFieldDecorator('mobile', {
-                                    rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号' }],
-                                    validateTrigger: 'change'
-                                })(<Input size="large" type="text" placeholder="手机号">
-                                    <Icon slot="prefix" type="mobile" style={{ color: 'rgba(0,0,0,.25)' }}/>
                                 </Input>)
                             }
                             </Form.Item>
@@ -118,23 +112,70 @@ const LoginForm = {
                                 <Col span={16}>
                                     <Form.Item>
                                         {
-                                            getFieldDecorator('captcha', {
+                                            getFieldDecorator('code1', {
                                                 rules: [{ required: true, message: '请输入验证码' }],
                                                 validateTrigger: 'blur'
                                             })(<Input size="large" type="text" placeholder="验证码">
-                                                <Icon slot="prefix" type="mail" style={{ color: 'rgba(0,0,0,.25)' }}/>
+                                                <Icon slot="prefix" type="slack" style={{ color: 'rgba(0,0,0,.25)' }}/>
                                             </Input>)
                                         }
                                     </Form.Item>
                                 </Col>
                                 <Col span={8}>
-                                    <Button
-                                        size="large"
-                                        tabindex="-1"
-                                        style={{ width: '100%' }}
-                                        disabled={this.state.smsSendBtn}
-                                        onClick={this.getCaptcha}
-                                    >获取验证码</Button>
+                                    <div style="width: 100%;height: 40px;display: flex;align-items: center;">
+                                        <img
+                                            ref="code1"
+                                            style="width: 100%;height: 40px;cursor: pointer;"
+                                            src="/api/api/admin/code"
+                                            onClick={() => {this.getCode('code1')}}
+                                        />
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Tabs.TabPane>
+                        <Tabs.TabPane key="tab2" tab="邮箱登录">
+                            <Form.Item>
+                                {
+                                    getFieldDecorator('email', {
+                                        rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入邮箱' }],
+                                        validateTrigger: 'change'
+                                    })(<Input size="large" type="text" placeholder="邮箱">
+                                        <Icon slot="prefix" type="mail" style={{ color: 'rgba(0,0,0,.25)' }}/>
+                                    </Input>)
+                                }
+                            </Form.Item>
+                            <Form.Item>
+                                {
+                                    getFieldDecorator('password2', {
+                                        rules: [{ required: true, message: '请输入密码' }],
+                                        validateTrigger: 'blur'
+                                    })(<Input size="large" type="password" placeholder="密码">
+                                        <Icon slot="prefix" type="lock" style={{ color: 'rgba(0,0,0,.25)' }}/>
+                                    </Input>)
+                                }
+                            </Form.Item>
+                            <Row gutter={16}>
+                                <Col span={16}>
+                                    <Form.Item>
+                                        {
+                                            getFieldDecorator('code2', {
+                                                rules: [{ required: true, message: '请输入验证码' }],
+                                                validateTrigger: 'blur'
+                                            })(<Input size="large" type="text" placeholder="验证码">
+                                                <Icon slot="prefix" type="slack" style={{ color: 'rgba(0,0,0,.25)' }}/>
+                                            </Input>)
+                                        }
+                                    </Form.Item>
+                                </Col>
+                                <Col span={8}>
+                                    <div style="width: 100%;height: 40px;display: flex;align-items: center;">
+                                        <img
+                                            ref="code2"
+                                            style="width: 100%;height: 40px;cursor: pointer;"
+                                            src="/api/api/admin/code"
+                                            onClick={() => {this.getCode('code2')}}
+                                        />
+                                    </div>
                                 </Col>
                             </Row>
                         </Tabs.TabPane>
@@ -163,11 +204,7 @@ const LoginForm = {
                     </Form.Item>
                     <div style={{ marginTop: '24px',lineHeight: '22px' }}>
                         <span>其他登录方式</span>
-                        <a style={{ marginLeft: '12px' }}>暂不支持</a>
-                        <router-link
-                            style={{ float: 'right' }}
-                            to={{ path: '/user/register', params: { user: 'aaa'} }}
-                        >注册账户</router-link>
+                        <a style={{ float: 'right' }}>暂不支持</a>
                     </div>
                 </Form>
             </div>

@@ -1,15 +1,15 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-09-09 23:06:28 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-09-09 23:06:28 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-11-03 22:13:55
  * @Description: 登陆注册布局组件
  */
 
 
 <script>
-import { mixinDevice } from '@/utils/mixin'
-const logo = require('@/assets/logo.svg')
+import { mixinDevice } from '@/utils/mixin';
+const logo = require('@/assets/image/logo.png');
 export default {
     name: 'UserLayout',
     mixins: [mixinDevice],
@@ -19,21 +19,13 @@ export default {
                 <div class="container">
                     {
                         <div class="top">
-                            <div class="header">
-                                <a href="/">
-                                    <img src={logo} class="logo" alt="logo"/>
-                                    <span class="title">Ant Design</span>
-                                </a>
-                            </div>
-                            <div class="desc">
-                                Swpe Ant Design ©2019 Created by Wlisfes
-                            </div>
+                            <img class="logo" src="http://kst.lisfes.cn/static/img/logo.c9241552.png" />
                         </div>
                     }
                     {
                         <router-view />
                     }
-                    {
+                    {false &&
                         <div class="footer">
                             <div class="links">
                                 <a href="/">帮助</a>
@@ -66,54 +58,55 @@ export default {
     .container {
         width: 100%;
         min-height: 100%;
-        background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
-        background-size: 100%;
-        padding: 110px 0 144px;
+        background: #f0f2f5 url('~@/assets/image/login.jpg');
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: cover;
+        transition: all 500ms;
         position: relative;
-        a {
-            text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 200px;
+        @media (max-width: 578px) {
+            padding-bottom: 0;
         }
         .top {
             text-align: center;
-            .header {
-                height: 48px;
-                line-height: 48px;
-                .badge {
-                    position: absolute;
-                    display: inline-block;
-                    line-height: 1;
-                    vertical-align: middle;
-                    margin-left: -12px;
-                    margin-top: -10px;
-                    opacity: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 16px;
+            .logo {
+                width: 180px;
+                border-radius: 90px;
+                display: block;
+                cursor: pointer;
+                animation: logo 10s linear 0s infinite;
+                @media (max-width: 578px) {
+                    width: 120px;
+                    border-radius: 60px;
                 }
-                .logo {
-                    height: 48px;
-                    vertical-align: top;
-                    margin-right: 16px;
-                    border-style: none;
+                @keyframes logo {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
                 }
-                .title {
-                    font-size: 33px;
-                    color: rgba(0, 0, 0, .85);
-                    font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-                    font-weight: 600;
-                    position: relative;
-                    top: 2px;
-                }
-            }
-            .desc {
-                font-size: 14px;
-                color: rgba(0, 0, 0, 0.45);
-                margin-top: 12px;
-                margin-bottom: 40px;
             }
         }
 
         .main {
-            min-width: 260px;
-            width: 368px;
+            min-width: 300px;
+            width: 450px;
             margin: 0 auto;
+            background-color: #f0f2f5;
+            padding: 0 16px 16px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
         }
         
         .footer {

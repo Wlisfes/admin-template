@@ -1,6 +1,6 @@
+import { mapState } from 'vuex';
+import { deviceEnquire, DEVICE_TYPE } from '@/utils/device';
 
-import { deviceEnquire, DEVICE_TYPE } from '@/utils/device'
-import { mapState } from 'vuex'
 
 
 const mixin = {
@@ -51,4 +51,13 @@ const AppDeviceEnquire = {
 }
 
 
-export { mixin, AppDeviceEnquire, mixinDevice }
+//混入App.vue组件   读取本地Storage数据
+const AppStore = {
+    created() {
+        const { $store,$ls } = this
+
+        
+    }
+}
+
+export { mixin, AppStore, AppDeviceEnquire, mixinDevice }

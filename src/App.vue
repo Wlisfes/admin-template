@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { AppDeviceEnquire } from '@/utils/mixin'
+import { AppDeviceEnquire,AppStore } from '@/utils/mixin'
 export default {
-    mixins: [AppDeviceEnquire],
+    mixins: [AppStore,AppDeviceEnquire],
     mounted () {
 
     }

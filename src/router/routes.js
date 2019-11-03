@@ -2,14 +2,15 @@
  * @Author: 情雨随风 
  * @Date: 2019-09-09 23:06:28 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-10-24 21:55:52
+ * @Last Modified time: 2019-11-03 17:09:51
  * @Description: 界面路由配置
  */
 
 import BasicLayout from "@/layout/BasicLayout";
 import UserLayout from "@/layout/UserLayout";
 
-export default [
+
+const Routes = [
     {
         path: "/",
         name: "BasicLayout",
@@ -17,11 +18,7 @@ export default [
 
         },
         component: BasicLayout
-    }
-]
-
-
-export const Basis = [
+    },
     {
         path: "/user",
         name: "UserLayout",
@@ -30,13 +27,13 @@ export const Basis = [
         component: UserLayout,
         children: [
             {
-                path: 'login',
+                path: '/user/login',
                 name: 'login',
                 meta: {},
                 component: () => import('@/views/user/Login')
             },
             {
-                path: 'register',
+                path: '/user/register',
                 name: 'register',
                 meta: {},
                 component: () => import('@/views/user/Register')
@@ -44,3 +41,7 @@ export const Basis = [
         ]
     }
 ]
+
+
+export default Routes;
+
