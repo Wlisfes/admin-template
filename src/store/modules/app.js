@@ -6,9 +6,9 @@ const state = {
     //菜单是否收起
     collapsed: false,
     //初始展开的 SubMenu 菜单项 key 数组
-    openKeys: ['sub1'],
+    openKeys: ['user'],
     //初始选中的 Item 菜单项 key 数组
-    selectedKeys: ['sub1-1']
+    selectedKeys: ['user-register']
 }
 
 

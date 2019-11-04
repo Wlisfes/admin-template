@@ -1,20 +1,23 @@
 const menu = [
     {
-        key: 'sub1',
-        icon: 'pie-chart',
-        title: '刀剑神域',
+        key: 'user',
+        icon: 'team',
+        title: '管理员/权限',
         children: [
             {
-                key: 'sub1-1',
-                title: '桐谷和人'
+                key: 'user-register',
+                title: '用户注册',
+                path: ''
             },
             {
-                key: 'sub1-2',
-                title: '结诚明月奈'
+                key: 'user-role',
+                title: '角色管理',
+                path: ''
             },
             {
-                key: 'sub1-3',
-                title: '西莉卡'
+                key: 'user-access',
+                title: '权限',
+                path: ''
             }
         ]
     },
