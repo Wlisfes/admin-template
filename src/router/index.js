@@ -14,25 +14,26 @@ const router = new Router({
     routes
 });
 
-var ACCESS_TOKEN = false
 
 router.beforeEach(async (to, from, next) => {
     NProgress.start()
-    const token = store.state.user.token
-    if(token) {
-        if(to.path === '/user/login' || to.path === '/user/register') {
+    if(Vue.ls.get('Access-Token')) {
+        if (to.path === '/user/login') {
             next({ path: '/' })
+            NProgress.done()
         }
         else {
             next()
         }
     }
     else {
-        if(to.path === '/user/login' || to.path === '/user/register') {
+        const whiteList = ['login', 'register']
+        if(whiteList.includes(to.name)) {
             next()
         }
         else {
             next({ path: '/user/login' })
+            NProgress.done()
         }
     }
 });

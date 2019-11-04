@@ -27,13 +27,13 @@ const Routes = [
         component: UserLayout,
         children: [
             {
-                path: '/user/login',
+                path: 'login',
                 name: 'login',
                 meta: {},
                 component: () => import('@/views/user/Login')
             },
             {
-                path: '/user/register',
+                path: 'register',
                 name: 'register',
                 meta: {},
                 component: () => import('@/views/user/Register')

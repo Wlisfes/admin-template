@@ -14,11 +14,30 @@ export const userInfo = params => {
 }
 
 
-//登录
-export const login = params => {
+//账户登录
+export const loginName = params => {
     return http({
-        url: `/api/admin/login`,
+        url: `/api/admin/login/name`,
         method: 'POST',
         data: params
     })
 }
+
+
+//邮箱登陆
+export const loginEmail = params => {
+    return http({
+        url: `/api/admin/login/email`,
+        method: 'POST',
+        data: params
+    })
+}
+
+
+
+
+
+
+
+
+
