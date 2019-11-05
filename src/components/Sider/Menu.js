@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-09-09 23:04:22 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-09-09 23:04:22 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-11-05 22:49:49
  * @Description: 导航栏菜单组件
  */
 
@@ -96,7 +96,9 @@ export default {
                     <SubMenu key={ele.key}>
                         <span slot="title"><Icon type={ele.icon} /><span>{ele.title}</span></span>
                         {ele.children.map(chil => (
-                            <Item key={chil.key}>{chil.title}</Item>
+                            <Item key={chil.key}>
+                                <router-link to={chil.path}>{chil.title}</router-link>
+                            </Item>
                         ))}
                     </SubMenu>
                 ))}

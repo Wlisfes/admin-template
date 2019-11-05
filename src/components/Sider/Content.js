@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-09-09 23:03:57 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-09-09 23:03:57 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-11-05 22:34:33
  * @Description: Content容器组件
  */
 
@@ -36,8 +36,7 @@ export default {
                     />
                 </Header>
                 <Content style={{ background: '#fff', margin: this.isMobile() ? '24px 0' : '24px' }}>
-                
-                    
+                    <router-view></router-view>
                 </Content>
                 <Footer></Footer>
             </Layout>

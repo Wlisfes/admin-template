@@ -18,6 +18,11 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
     NProgress.start()
+
+    const { name,meta } = to;
+    store.commit('app/setopenKeys', [meta.key])
+    store.commit('app/setselectedKeys', [name])
+
     if(Vue.ls.get('Access-Token')) {
         if (to.path === '/user/login') {
             next({ path: '/' })

@@ -1,53 +1,69 @@
 const menu = [
     {
-        key: 'user',
+        key: 'home',
+        icon: 'home',
+        title: '主页',
+        children: [
+            {
+                key: 'home-index',
+                title: '首页',
+                path: '/home'
+            }
+        ]
+    },
+    {
+        key: 'admin',
         icon: 'team',
         title: '管理员/权限',
         children: [
             {
-                key: 'user-register',
+                key: 'admin-register',
                 title: '用户注册',
-                path: ''
+                path: '/admin/register'
             },
             {
-                key: 'user-role',
+                key: 'admin-role',
                 title: '角色管理',
-                path: ''
+                path: '/admin/role'
             },
             {
-                key: 'user-access',
-                title: '权限',
-                path: ''
+                key: 'admin-access',
+                title: '权限管理',
+                path: '/admin/access'
             }
         ]
     },
     {
-        key: 'sub2',
-        icon: 'radar-chart',
-        title: '斩·赤红之瞳',
+        key: 'article',
+        icon: 'chrome',
+        title: '文章管理',
         children: [
             {
-                key: 'sub2-1',
-                title: '玛茵'
+                key: 'add-article',
+                title: '新增文章',
+                path: '/add/article'
             },
             {
-                key: 'sub2-2',
-                title: '赤瞳'
-            },
-            {
-                key: 'sub2-3',
-                title: '黑瞳'
+                key: 'article-list',
+                title: '文章列表',
+                path: '/article/list'
             }
         ]
     },
     {
-        key: 'sub3',
-        icon: 'heat-map',
-        title: '樱花庄的宠物女孩',
+        key: 'note',
+        icon: 'chrome',
+        title: '笔记管理',
         children: [
             {
-                key: 'sub3-1',
-                title: '真白'
+                key: 'add-note',
+                title: '新增笔记',
+                path: '/add/note'
+            },
+            {
+                key: 'note-list',
+                title: '笔记列表',
+                path: '/note/list'
             }
         ]
     }
