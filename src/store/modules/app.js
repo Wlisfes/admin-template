@@ -1,4 +1,6 @@
 const state = {
+	user: null, //登陆信息
+
 	device: 'desktop', //视口
 
 	collapsed: false, //菜单是否收起
@@ -9,6 +11,9 @@ const state = {
 };
 
 const mutations = {
+	setuser: (state, user) => {
+		state.user = user;
+	},
 	setdevice: (state, device) => {
 		state.device = device;
 	},

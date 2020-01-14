@@ -5,11 +5,12 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import '@/core/use';
-
-Vue.config.productionTip = false;
+import bootstrap from '@/core/bootstrap';
+import '@/permission';
 
 new Vue({
 	router,
 	store,
+	created: bootstrap,
 	render: (h) => h(App)
 }).$mount('#app');
