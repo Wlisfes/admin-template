@@ -12,11 +12,7 @@ const Login = {
 			this.$message.info('注册功能已关闭，请联系管理员处理！');
 		},
 		onUpdatePassword() {
-			// this.$message.info('改密功能暂未开发，尽请期待！');
-			this.$notification.info({
-				message: '改密功能暂未开发，尽请期待！',
-				description: ''
-			});
+			this.$message.info('改密功能暂未开发，尽请期待！');
 		},
 		onSubmit(e) {
 			e.preventDefault();
@@ -25,13 +21,12 @@ const Login = {
 				if (!err) {
 					const { username, password } = respones;
 					if ('admin' === username && '000000' === password) {
-					} else {
-						// this.$message.info('账户或密码错误，请重新输入！');
-						this.$notification.error({
-							message: '账户或密码错误，请重新输入！',
-							description: ''
+						this.$ls.set('user', { username, password }, 24 * 60 * 60 * 1000);
+						this.$router.replace({
+							path: '/'
 						});
-
+					} else {
+						this.$message.error('账户或密码错误，请重新输入！');
 						setTimeout(() => {
 							this.loading = false;
 						}, 600);
@@ -49,14 +44,14 @@ const Login = {
 		return (
 			<div class="Login">
 				<div class="Login-Form">
-					<h1 style={{ textAlign: 'center' }}>刀剑神域</h1>
+					<h1 style={{ textAlign: 'center' }}>欢迎到来、久违了!</h1>
 					<Form onSubmit={this.onSubmit}>
 						<Form.Item>
 							{getFieldDecorator('username', {
 								rules: [{ required: true, message: '请输入帐户名' }],
 								validateTrigger: 'change'
 							})(
-								<Input size="large" type="text" placeholder="账户">
+								<Input size="large" type="text" placeholder="username">
 									<Icon
 										slot="prefix"
 										type="user"
@@ -70,7 +65,7 @@ const Login = {
 								rules: [{ required: true, message: '请输入密码' }],
 								validateTrigger: 'blur'
 							})(
-								<Input size="large" type="password" placeholder="密码">
+								<Input size="large" type="password" placeholder="password">
 									<Icon
 										slot="prefix"
 										type="lock"
@@ -111,7 +106,7 @@ export default Form.create({})(Login);
 .Login {
 	flex: 1;
 	min-width: 375px;
-	background: url('~@/assets/image/login-min.jpg') center center / cover no-repeat;
+	background: url('~@/assets/image/login.jpg') center center / cover no-repeat;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
