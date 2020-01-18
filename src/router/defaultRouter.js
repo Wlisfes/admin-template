@@ -1,6 +1,6 @@
 import { Main } from '@/components/layout';
 
-const routes = [
+const defaultRouter = [
 	{
 		path: '/',
 		redirect: '/home',
@@ -9,10 +9,6 @@ const routes = [
 			{
 				path: 'home',
 				component: () => import('@/views/Home/Home')
-			},
-			{
-				path: 'user',
-				component: () => import('@/views/User/User')
 			}
 		]
 	},
@@ -30,4 +26,4 @@ const routes = [
 	}
 ];
 
-export default routes;
+export default defaultRouter;

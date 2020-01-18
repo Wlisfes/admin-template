@@ -2,7 +2,7 @@
  * @Date: 2020-01-14 16:21:48
  * @Author: 情雨随风
  * @LastEditors  : 情雨随风
- * @LastEditTime : 2020-01-14 16:24:07
+ * @LastEditTime : 2020-01-17 14:08:47
  * @Description: 大屏侧边导航栏组件
  -->
 
@@ -32,7 +32,7 @@ export default {
 						{
 							key: 'home-index',
 							title: '首页',
-							path: '/home'
+							path: '/'
 						}
 					]
 				},
@@ -44,17 +44,17 @@ export default {
 						{
 							key: 'admin-register',
 							title: '用户注册',
-							path: '/admin/register'
+							path: '/user'
 						},
 						{
 							key: 'admin-role',
 							title: '角色管理',
-							path: '/admin/role'
+							path: '/'
 						},
 						{
 							key: 'admin-access',
 							title: '权限管理',
-							path: '/admin/access'
+							path: '/'
 						}
 					]
 				},
@@ -66,12 +66,12 @@ export default {
 						{
 							key: 'add-article',
 							title: '新增文章',
-							path: '/add/article'
+							path: '/'
 						},
 						{
 							key: 'article-list',
 							title: '文章列表',
-							path: '/article/list'
+							path: '/'
 						}
 					]
 				},
@@ -83,12 +83,12 @@ export default {
 						{
 							key: 'add-note',
 							title: '新增笔记',
-							path: '/add/note'
+							path: '/'
 						},
 						{
 							key: 'note-list',
 							title: '笔记列表',
-							path: '/note/list'
+							path: '/'
 						}
 					]
 				}

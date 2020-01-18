@@ -20,7 +20,7 @@ const Login = {
 			this.form.validateFields(['username', 'password'], async (err, respones) => {
 				if (!err) {
 					const { username, password } = respones;
-					if ('admin' === username && '000000' === password) {
+					if (('admin' === username || 'lisfes' === username) && '000000' === password) {
 						this.$ls.set('user', { username, password }, 24 * 60 * 60 * 1000);
 						this.$router.replace({
 							path: '/'
